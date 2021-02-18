@@ -15,6 +15,7 @@ import domain.Client;
 import domain.Invoice;
 import domain.Lawyer;
 import domain.Obligation;
+import domain.ObligationAttendance;
 import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
@@ -102,6 +103,10 @@ public class ProcessClientRequestsThread extends Thread {
                             break;
                         case GET_OBLIGATIONS:
                             response.setResult(Controller.getInstance().getObligations());
+                            break;
+                        case SAVE_ATTENDANCE:
+                            ObligationAttendance obligationAttendance = (ObligationAttendance) request.getArgument();
+                            Controller.getInstance().saveObligationAttendance(obligationAttendance);
                             break;
                     }
                 } catch (Exception e) {
