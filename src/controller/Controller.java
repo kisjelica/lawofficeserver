@@ -9,6 +9,7 @@ import domain.Administrator;
 import domain.Client;
 import domain.Invoice;
 import domain.Lawyer;
+import domain.Obligation;
 import domain.Service;
 import java.util.List;
 import operation.AbstractGenericOperation;
@@ -23,6 +24,7 @@ import operation.lawyer.CreateNewLawyer;
 import operation.lawyer.DeleteLawyer;
 import operation.lawyer.GetAllLawyers;
 import operation.lawyer.SaveLawyer;
+import operation.obligation.CreateObligation;
 import operation.service.GetAllServices;
 
 /**
@@ -38,6 +40,8 @@ public class Controller {
     public static Controller getInstance() {
         return ControllerHolder.INSTANCE;
     }
+
+    
 
 
    
@@ -154,5 +158,12 @@ public class Controller {
         operation.execute(lawyer);
         List<Invoice> invoices = ((GetInvoiceByLawyer)operation).getInvoices();
         return invoices;
+    }
+    
+    public Obligation createObligation(Obligation obligation) throws Exception {
+        AbstractGenericOperation operation = new CreateObligation();
+        operation.execute(obligation);
+        
+        return obligation;
     }
 }

@@ -5,6 +5,7 @@
  */
 package operation.obligation;
 
+import domain.Obligation;
 import operation.AbstractGenericOperation;
 
 /**
@@ -15,12 +16,13 @@ public class CreateObligation extends AbstractGenericOperation{
 
     @Override
     protected void preconditions(Object param) throws Exception {
-    
+        if(param == null || !(param instanceof Obligation))
+            throw new Exception("Invalid obligation data!");
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        repository.add((Obligation)param);
     }
     
 }

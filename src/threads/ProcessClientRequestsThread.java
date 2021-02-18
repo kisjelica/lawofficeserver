@@ -14,6 +14,7 @@ import domain.Administrator;
 import domain.Client;
 import domain.Invoice;
 import domain.Lawyer;
+import domain.Obligation;
 import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
@@ -94,6 +95,10 @@ public class ProcessClientRequestsThread extends Thread {
                         case GET_INVOICES_OF_LAWYER:
                             Lawyer lawyer = (Lawyer) request.getArgument();
                             response.setResult(Controller.getInstance().getInvoicesOfLawyer(lawyer));
+                            break;
+                        case CREATE_OBLIGATION:
+                            Obligation obligation = (Obligation) request.getArgument();
+                            response.setResult(Controller.getInstance().createObligation(obligation));
                             break;
                     }
                 } catch (Exception e) {
