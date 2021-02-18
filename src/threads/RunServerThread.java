@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  */
 public class RunServerThread extends Thread{
     
-    private ServerSocket serverSocket;
-    private List<ProcessClientRequestsThread> clients;
+    private final ServerSocket serverSocket;
+    private final List<ProcessClientRequestsThread> clients;
 
     public RunServerThread() throws IOException {
         serverSocket = new ServerSocket(1389);

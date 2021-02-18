@@ -125,10 +125,11 @@ public class ProcessClientRequestsThread extends Thread {
                 sender.send(response);
 
             } catch (Exception ex) {
-
-                Logger.getLogger(ProcessClientRequestsThread.class.getName()).log(Level.SEVERE, null, ex);
+               Logger.getLogger(ProcessClientRequestsThread.class.getName()).log(Level.SEVERE, null, ex);
+               user = null;
             }
         }
+        
     }
 
     public Socket getSocket() {

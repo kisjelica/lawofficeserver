@@ -234,7 +234,7 @@ public class ServerForm extends javax.swing.JFrame {
             List<ProcessClientRequestsThread> clients = runServerThread.getClients();
             List<User> users = new ArrayList<>();
             for (ProcessClientRequestsThread client : clients) {
-                if(client.getUser() != null){
+                if(client.isAlive() && client.getUser() != null){
                     users.add(client.getUser());
                 }
             }
