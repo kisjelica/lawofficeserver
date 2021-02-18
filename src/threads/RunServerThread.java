@@ -63,4 +63,10 @@ public class RunServerThread extends Thread{
             }
         }
     }
+
+    public List<ProcessClientRequestsThread> getClients() {
+        return clients;
+    }
+    
+    
 }

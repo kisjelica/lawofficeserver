@@ -7,11 +7,17 @@ package view;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import threads.ProcessClientRequestsThread;
+import threads.RefreshUsersThread;
 import threads.RunServerThread;
+import util.User;
+import view.table.ServerTableModel;
 
 /**
  *
@@ -29,6 +35,8 @@ public class ServerForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         lblServerStatus.setText("Server is down.");
         lblServerStatus.setForeground(Color.red);
+        RefreshUsersThread refresh = new RefreshUsersThread(this);
+        refresh.start();
        
     }
 
@@ -219,4 +227,20 @@ public class ServerForm extends javax.swing.JFrame {
     private javax.swing.JMenu menuConfig;
     private javax.swing.JTable tblUsers;
     // End of variables declaration//GEN-END:variables
+
+    public void refreshTable() {
+        
+        if (runServerThread != null && runServerThread.getServerSocket().isBound()){
+            List<ProcessClientRequestsThread> clients = runServerThread.getClients();
+            List<User> users = new ArrayList<>();
+            for (ProcessClientRequestsThread client : clients) {
+                if(client.getUser() != null){
+                    users.add(client.getUser());
+                }
+            }
+            
+            ServerTableModel model = new ServerTableModel(users);
+            tblUsers.setModel(model);
+        }
+    }
 }

@@ -20,6 +20,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.User;
 
 /**
  *
@@ -30,11 +31,12 @@ public class ProcessClientRequestsThread extends Thread {
     Socket socket;
     Sender sender;
     Receiver receiver;
-
+    private User user;
     public ProcessClientRequestsThread(Socket socket) {
         this.socket = socket;
         sender = new Sender(socket);
         receiver = new Receiver(socket);
+        user = null;
     }
 
     @Override
@@ -48,11 +50,15 @@ public class ProcessClientRequestsThread extends Thread {
                     switch (request.getOperation()) {
                         case LOGIN_ADMIN:
                             Administrator administrator = (Administrator) request.getArgument();
-                            response.setResult(Controller.getInstance().loginAdmin(administrator.getUsername(), administrator.getUsername()));
+                            administrator = Controller.getInstance().loginAdmin(administrator.getUsername(), administrator.getUsername());
+                            response.setResult(administrator);
+                            user = new User("Administrator",administrator.getUsername());
                             break;
                         case LOGIN_LAWYER:
                             Lawyer lawyerLogin = (Lawyer) request.getArgument();
-                            response.setResult(Controller.getInstance().loginLawyer(lawyerLogin.getUsername(),lawyerLogin.getPassword()));
+                            lawyerLogin = Controller.getInstance().loginLawyer(lawyerLogin.getUsername(),lawyerLogin.getPassword());
+                            response.setResult(lawyerLogin);
+                            user = new User(lawyerLogin.toString(),lawyerLogin.getUsername());
                             break;
                         case CREATE_LAWYER:
                             response.setResult(Controller.getInstance().createLawyer());
@@ -128,5 +134,10 @@ public class ProcessClientRequestsThread extends Thread {
     public Socket getSocket() {
         return socket;
     }
+
+    public User getUser() {
+        return user;
+    }
+    
     
 }
