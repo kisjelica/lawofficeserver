@@ -50,5 +50,9 @@ public class ServerTableModel extends AbstractTableModel{
                 return "n/a";
         }
     }
+
+    public void clear() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

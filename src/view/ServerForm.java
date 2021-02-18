@@ -127,6 +127,11 @@ public class ServerForm extends javax.swing.JFrame {
         menuConfig.setText("Configuration");
 
         jmiDbAndServer.setText("Database and server");
+        jmiDbAndServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDbAndServerActionPerformed(evt);
+            }
+        });
         menuConfig.add(jmiDbAndServer);
 
         jMenuBar1.add(menuConfig);
@@ -200,11 +205,17 @@ public class ServerForm extends javax.swing.JFrame {
                 runServerThread.stopServerThread();
                 lblServerStatus.setText("Server is down.");
                 lblServerStatus.setForeground(Color.red);
+                tblUsers.setModel(new ServerTableModel(new ArrayList<>()));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnStopServerActionPerformed
+
+    private void jmiDbAndServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDbAndServerActionPerformed
+        ConfigurationForm configurationForm = new ConfigurationForm(this, false);
+        configurationForm.setVisible(true);
+    }//GEN-LAST:event_jmiDbAndServerActionPerformed
 
     /**
      * @param args the command line arguments
