@@ -26,8 +26,10 @@ public class SaveInvoice extends AbstractGenericOperation{
     protected void executeOperation(Object param) throws Exception {
         Invoice invoice = (Invoice) param;
         repository.edit(invoice);
+        if(!(invoice.getItems() == null)){
         for (InvoiceItem item : invoice.getItems()) {
             repository.add(item);
+        }
         }
     }
     

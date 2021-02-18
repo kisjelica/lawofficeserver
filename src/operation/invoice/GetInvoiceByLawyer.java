@@ -6,6 +6,7 @@
 package operation.invoice;
 
 import domain.Invoice;
+import domain.InvoiceItem;
 import domain.Lawyer;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,9 @@ public class GetInvoiceByLawyer extends AbstractGenericOperation {
                 filteredList.add(invoice);
             }
         }
+        
         invoices = filteredList;
+        
     }
 
     public List<Invoice> getInvoices() {
