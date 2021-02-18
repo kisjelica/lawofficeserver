@@ -25,6 +25,7 @@ import operation.lawyer.DeleteLawyer;
 import operation.lawyer.GetAllLawyers;
 import operation.lawyer.SaveLawyer;
 import operation.obligation.CreateObligation;
+import operation.obligation.GetAllObligations;
 import operation.service.GetAllServices;
 
 /**
@@ -41,6 +42,7 @@ public class Controller {
         return ControllerHolder.INSTANCE;
     }
 
+    
     
 
 
@@ -166,4 +168,12 @@ public class Controller {
         
         return obligation;
     }
+    
+    public List<Obligation> getObligations() throws Exception {
+        AbstractGenericOperation operation = new GetAllObligations();
+        operation.execute(new Obligation());
+        List<Obligation> obligations = ((GetAllObligations) operation).getObligations();
+        return obligations;
+    }
+
 }

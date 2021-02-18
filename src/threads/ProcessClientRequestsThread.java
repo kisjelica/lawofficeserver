@@ -100,6 +100,9 @@ public class ProcessClientRequestsThread extends Thread {
                             Obligation obligation = (Obligation) request.getArgument();
                             response.setResult(Controller.getInstance().createObligation(obligation));
                             break;
+                        case GET_OBLIGATIONS:
+                            response.setResult(Controller.getInstance().getObligations());
+                            break;
                     }
                 } catch (Exception e) {
                     response.setException(e);
