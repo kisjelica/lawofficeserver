@@ -108,6 +108,10 @@ public class ProcessClientRequestsThread extends Thread {
                             ObligationAttendance obligationAttendance = (ObligationAttendance) request.getArgument();
                             Controller.getInstance().saveObligationAttendance(obligationAttendance);
                             break;
+                        case ATTENDANCE_EXISTS:
+                            ObligationAttendance obligationAttendanceCheck = (ObligationAttendance) request.getArgument();
+                            response.setResult(Controller.getInstance().attendanceExists(obligationAttendanceCheck));
+                            break;
                     }
                 } catch (Exception e) {
                     response.setException(e);

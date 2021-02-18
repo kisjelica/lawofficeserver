@@ -27,6 +27,7 @@ import operation.lawyer.GetAllLawyers;
 import operation.lawyer.SaveLawyer;
 import operation.obligation.CreateObligation;
 import operation.obligation.GetAllObligations;
+import operation.obligation.attendance.CheckAttendanceExists;
 import operation.obligation.attendance.SaveObligationAttendance;
 import operation.service.GetAllServices;
 
@@ -43,6 +44,7 @@ public class Controller {
     public static Controller getInstance() {
         return ControllerHolder.INSTANCE;
     }
+
     
 
     private static class ControllerHolder {
@@ -177,4 +179,11 @@ public class Controller {
         operation.execute(obligationAttendance);
     
     }
+    
+    public boolean attendanceExists(ObligationAttendance obligationAttendance) throws Exception {
+        AbstractGenericOperation operation = new CheckAttendanceExists();
+        operation.execute(obligationAttendance);
+        return ((CheckAttendanceExists) operation).isExists();
+    }
+    
 }
