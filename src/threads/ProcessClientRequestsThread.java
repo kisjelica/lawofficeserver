@@ -125,4 +125,8 @@ public class ProcessClientRequestsThread extends Thread {
         }
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+    
 }
