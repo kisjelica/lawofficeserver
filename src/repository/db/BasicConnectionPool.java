@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,6 +59,7 @@ public class BasicConnectionPool implements ConnectionPool {
     @Override
     public boolean releaseConnection(Connection connection) {
         connectionPool.add(connection);
+        
         return usedConnections.remove(connection);
     }
 

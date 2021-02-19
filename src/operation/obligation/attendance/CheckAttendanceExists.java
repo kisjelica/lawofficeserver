@@ -35,7 +35,7 @@ public class CheckAttendanceExists extends AbstractGenericOperation{
     }
 
     public boolean isExists() {
-        System.out.println(exists);
+        
         return exists;
     }
     
