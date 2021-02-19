@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,9 +23,9 @@ public class DbConnectionFactory {
 
     private Connection connection;
     private static DbConnectionFactory instance;
-    private ConnectionPool connectionPool;
+    private static ConnectionPool connectionPool;
 
-    private DbConnectionFactory()  {
+    private DbConnectionFactory() {
         try {
             Properties properties = new Properties();
             properties.load(new FileInputStream("config/config.properties"));
@@ -32,12 +33,14 @@ public class DbConnectionFactory {
             String username = properties.getProperty("username");
             String password = properties.getProperty("password");
             connectionPool = BasicConnectionPool.create(url, username, password);
+
         } catch (Exception ex) {
             Logger.getLogger(DbConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    public static DbConnectionFactory getInstance()  {
+    public static DbConnectionFactory getInstance() {
         if (instance == null) {
             instance = new DbConnectionFactory();
         }
@@ -45,8 +48,15 @@ public class DbConnectionFactory {
     }
 
     public Connection getConnection() throws Exception {
-        connection = connectionPool.getConnection();
-        connection.setAutoCommit(false);
-       return connection;
+        if (connection == null || connection.isClosed()) {
+            connection = connectionPool.getConnection();
+            connection.setAutoCommit(false);
+        }
+        return connection;
+    }
+    
+    public void releaseConnection() throws SQLException{
+        connectionPool.releaseConnection(connection);
+        
     }
 }
