@@ -18,6 +18,7 @@ public interface DbRepository<T>  extends Repository<T>{
     }
     
     default public void disconnect() throws Exception{
+     //   DbConnectionFactory.getInstance().releaseConnection(DbConnectionFactory.getInstance().getConnection());
         DbConnectionFactory.getInstance().getConnection().close();
     }
     

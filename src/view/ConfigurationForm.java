@@ -7,10 +7,12 @@ package view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -144,12 +146,17 @@ public class ConfigurationForm extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-            Properties properties = new Properties();
-            properties.load(new FileInputStream("config/config.properties"));
-            properties.setProperty("url", txtURL.getText());
-            properties.setProperty("username", txtPassword.getText());
-            properties.setProperty("password", txtPassword.getText());
-            properties.setProperty("port", txtPort.getText());
+            if (JOptionPane.showConfirmDialog(rootPane, "Are you sure that you want to save this configuration?", "Confirm", JOptionPane.YES_NO_OPTION) == 0) {
+                Properties properties = new Properties();
+                //properties.load(new FileInputStream("config/config.properties"));
+                properties.setProperty("url", txtURL.getText());
+                properties.setProperty("username", txtUsername.getText());
+                properties.setProperty("password", txtPassword.getText());
+                properties.setProperty("port", txtPort.getText());
+
+                properties.store(new FileOutputStream("config/config.properties"), null);
+                this.dispose();
+            }
         } catch (IOException ex) {
             Logger.getLogger(ConfigurationForm.class.getName()).log(Level.SEVERE, null, ex);
         }
