@@ -17,5 +17,5 @@ public interface Repository<T> {
 
     void delete(T param) throws Exception;
 
-    List<T> getAll() throws Exception;
+   
 }

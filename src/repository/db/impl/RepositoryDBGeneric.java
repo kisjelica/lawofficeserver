@@ -128,11 +128,7 @@ public class RepositoryDBGeneric implements DbRepository<GenericEntity> {
         statement.close();
     }
 
-    @Override
-    public List<GenericEntity> getAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
    
 
     public Map<String, String> getForeignKeys(Connection connection, String tableName) throws SQLException {
