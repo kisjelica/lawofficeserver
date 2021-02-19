@@ -154,7 +154,7 @@ public class ConfigurationForm extends javax.swing.JDialog {
                 properties.setProperty("password", txtPassword.getText());
                 properties.setProperty("port", txtPort.getText());
 
-                properties.store(new FileOutputStream("config/config.properties"), null);
+                properties.store(new FileOutputStream("config.properties"), null);
                 this.dispose();
             }
         } catch (IOException ex) {
@@ -182,7 +182,7 @@ public class ConfigurationForm extends javax.swing.JDialog {
     private void prepareView() {
         try {
             Properties properties = new Properties();
-            properties.load(new FileInputStream("config/config.properties"));
+            properties.load(new FileInputStream("config.properties"));
             String url = properties.getProperty("url");
             String username = properties.getProperty("username");
             String password = properties.getProperty("password");

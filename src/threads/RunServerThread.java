@@ -26,7 +26,7 @@ public class RunServerThread extends Thread {
 
     public RunServerThread() throws IOException {
         Properties properties = new Properties();
-        properties.load(new FileInputStream("config/config.properties"));
+        properties.load(new FileInputStream("config.properties"));
         int port = Integer.parseInt(properties.getProperty("port"));
         serverSocket = new ServerSocket(port);
         clients = new ArrayList<>();
