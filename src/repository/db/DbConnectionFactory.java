@@ -28,7 +28,7 @@ public class DbConnectionFactory {
     private DbConnectionFactory() {
         try {
             Properties properties = new Properties();
-            properties.load(new FileInputStream("config/config.properties"));
+            properties.load(new FileInputStream("config.properties"));
             String url = properties.getProperty("url");
             String username = properties.getProperty("username");
             String password = properties.getProperty("password");
